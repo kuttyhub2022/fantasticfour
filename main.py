@@ -588,7 +588,7 @@ def start(client: pyrogram.client.Client, message: pyrogram.types.messages_and_m
 @app.on_message(filters.command(['help']))
 def help(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     oldm = app.send_message(message.chat.id,
-                     "**/start - To Check Availabe Conversions\n/help - This Message\n/imagegen - Text to Image\n/videogen - Text to Video\n/cancel - To Cancel\n/rename - To Rename\n/source - Github Source Code\n/play - To Play Game\n**", reply_to_message_id=message.id)
+                     "**/start - To Check Availabe Conversions\n/help - This Message\n/cancel - To Cancel\n/rename - To Rename\n/source - Github Source Code\n/play - To Play Game\n\n [ https://t.me/movie_time_botonly ]**", reply_to_message_id=message.id)
     dm = threading.Thread(target=lambda:dltmsg(message,oldm),daemon=True)
     dm.start() 
 
@@ -596,7 +596,7 @@ def help(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
 #source
 @app.on_message(filters.command(['source']))
 def source(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
-    oldm = app.send_message(message.chat.id, "**__GITHUB__ - https://github.com/bipinkrish/File-Converter-Bot**", disable_web_page_preview=True, reply_to_message_id=message.id)
+    oldm = app.send_message(message.chat.id, "**__GITHUB__ - https://urlsopen.com/AUnx \n\n TRUMBOTS**", disable_web_page_preview=True, reply_to_message_id=message.id)
     dm = threading.Thread(target=lambda:dltmsg(message,oldm),daemon=True)
     dm.start() 
 
