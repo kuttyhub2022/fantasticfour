@@ -150,7 +150,8 @@ START_TEXT = f'--**Available formats**--\n\n\
 **Documents** 💼 \n__{helperfunctions.give_name(LBW)},{helperfunctions.give_name(LBI)},{helperfunctions.give_name(LBC)}__\n\n\
 **Fonts** 🔤 \n__{helperfunctions.give_name(FF)}__\n\n\
 **EBooks** 📚 \n__{helperfunctions.give_name(EB)}__\n\n\
-**Archives** 🗄 \n__{helperfunctions.give_name(ARC)}__'
+**Archives** 🗄 \n__{helperfunctions.give_name(ARC)}__\n\n
+**CHANNEL @movie_time_botonly**' 
 VA_TEXT = helperfunctions.give_name(VIDAUD)
 IMG_TEXT = helperfunctions.give_name(IMG)
 LBW_TEXT = helperfunctions.give_name(LBW)
