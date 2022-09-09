@@ -222,6 +222,8 @@ def genrateimages(message,prompt):
     # latfile = aifunctions.latentdiff(prompt) # latent direct
     # imagelist = aifunctions.latdifstatus(ldhash,prompt) # latent get
     # mdfile = aifunctions.mindallestatus(mdhash,prompt) # min dalle get
+    sdhash = aifunctions.stablediff(prompt,AutoCall=False) # stable diff
+    sdfile = aifunctions.stablediffstatus(sdhash,prompt) # stable diff get
 
     # dalle mini
     app.send_message(message.chat.id,"**DALLE MINI**", reply_to_message_id=message.id)
@@ -229,6 +231,12 @@ def genrateimages(message,prompt):
         app.send_document(message.chat.id,document=ele,force_document=True)
         os.remove(ele)
     os.rmdir(prompt)
+
+    # stable diffusion
+    if sdfile !=  None:
+        app.send_message(message.chat.id,"**STABLE DIFFUSION**", reply_to_message_id=message.id)
+        app.send_document(message.chat.id,document=sdfile,force_document=True)
+        os.remove(sdfile)
 
     # latent diffusion
     # app.send_message(message.chat.id,f"__LATENT DIFFUSION :__ **{prompt}**", reply_to_message_id=message.id)
@@ -274,8 +282,14 @@ def readf(message,oldmessage,allowrename=False):
             txt = rf.read()
         n = 4096
         split = [txt[i:i+n] for i in range(0, len(txt), n)]
+
+        if len(split) > 10:
+            app.send_message(message.chat.id, "**File Contents is too Long**", reply_to_message_id=message.id)
+            return
+
         for ele in split:
-            app.send_message(message.chat.id, ele, reply_to_message_id=message.id)   
+            app.send_message(message.chat.id, ele, reply_to_message_id=message.id)
+            time.sleep(3)   
     except:
         if allowrename:
             with open(f'{message.from_user.id}.json', 'wb') as handle:
@@ -319,28 +333,32 @@ def sendphoto(message,oldmessage):
 def extract(message,oldm):
     file, msg = down(message)
     cmd,foldername,infofile = helperfunctions.zipcommand(file,message)
+    if msg != None:
+        app.edit_message_text(message.chat.id, msg.id, '__Extracting__')
     os.system(cmd)
     os.remove(file)
 
     with open(infofile, 'r') as f:
         lines = f.read()
     last = lines.split("Everything is Ok\n\n")[-1].replace("      ","")
-    
+    os.remove(infofile)
 
     if os.path.exists(foldername):
         dir_list = helperfunctions.absoluteFilePaths(foldername)
         if len(dir_list) > 30:
-            app.send_message(message.chat.id, f"**Number of Files is {len(dir_list)} which is More than the Limit of 30**", reply_to_message_id=message.id)
-            return
+            app.send_message(message.chat.id, f"__Number of files is **{len(dir_list)}** which is more than the limit of **30**__", reply_to_message_id=message.id)
+            os.remove(f'{message.id}downstatus.txt')
+            if msg != None:
+                app.delete_messages(message.chat.id,message_ids=[msg.id])
+        else:
+            for ele in dir_list:
+                if os.path.getsize(ele) > 0:
+                    up(message, ele, msg)
+                    os.remove(ele)
+                else:
+                    app.send_message(message.chat.id, f'**{ele.split("/")[-1]}** __is Skipped because it is 0 bytes__', reply_to_message_id=message.id)
+            app.send_message(message.chat.id, f'__{last}__', reply_to_message_id=message.id)
 
-        for ele in dir_list:
-            if os.path.getsize(ele) > 0:
-                up(message, ele, msg)
-                os.remove(ele)
-            else:
-                app.send_message(message.chat.id, f'**{ele.split("/")[-1]}** __is Skipped because it is 0 bytes__', reply_to_message_id=message.id)
-        
-        app.send_message(message.chat.id, f'__{last}__', reply_to_message_id=message.id)
         shutil.rmtree(foldername)
     else:
         app.send_message(message.chat.id, "**Unable to Extract**", reply_to_message_id=message.id)
