@@ -598,7 +598,8 @@ def downstatus(statusfile,message):
 # app messages
 @app.on_message(filters.command(['start']))
 def start(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
-    oldm = app.send_message(message.chat.id, f"Welcome {message.from_user.mention}\nSend a **File** first and then **Extension**\n\n{START_TEXT}", reply_to_message_id=message.id)
+    oldm = app.send_message(message.chat.id, f"Welcome {message.from_user.mention}\nSend a **File** first and then **Extension**\n\n{START_TEXT}", reply_to_message_id=message.id,
+	   reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🧑‍💻**DEV**🧑‍💻",url="https://t.me/FLIGHER")]]))		    
     dm = threading.Thread(target=lambda:dltmsg(message,oldm,30),daemon=True)
     dm.start()                        
 
@@ -608,7 +609,7 @@ def start(client: pyrogram.client.Client, message: pyrogram.types.messages_and_m
 def help(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     oldm = app.send_message(message.chat.id,
                      "**/start - To Check Availabe Conversions\n/help - This Message\n/cancel - To Cancel\n/rename - To Rename\n/source - Github Source Code\n/play - To Play Game", reply_to_message_id=message.id,
-	   reply_markup=InlineKeyboardMarkup([[InlineKeyBoardButton("🚨**SAVECONTENT**🚨",url="https://t.me/SaveContent_Tb_Bot")]]))		    
+	   reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🚨**TRUMBOTS**🚨",url="https://t.me/movie_time_botonly")]]))		    
     dm = threading.Thread(target=lambda:dltmsg(message,oldm),daemon=True)
     dm.start() 
 
