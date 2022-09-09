@@ -19,7 +19,7 @@ import guess
 
 
 # env
-bot_token = os.environ.get("TOKEN", "5582672566:AAFTEgKiLQOHtEwqNdtb1gYwBDXRbZkPUa8") 
+bot_token = os.environ.get("TOKEN", "5756120269:AAEE4iRhdQTvplAECrsMJAPQ7a1n7yglwZw") 
 api_hash = os.environ.get("HASH", "3eba5d471162181b8a3f7f5c0a23c307") 
 api_id = os.environ.get("ID", "4682685")
 
@@ -451,7 +451,8 @@ def rname(message,newname,oldm):
 def saverec(message):
     
     if "https://t.me/c/" in message.text:
-        app.send_message(message.chat.id, "**Send me only Public Channel Links**", reply_to_message_id=message.id)
+        app.send_message(message.chat.id, "**Send me only Public Channel Links If you Want private Channel SAVE access use below button**", reply_to_message_id=message.id,
+	reply_markup=InlineKeyboardMarkup([[InlineKeyBoardButton("🚨**SAVECONTENT**🚨",url="https://t.me/SaveContent_Tb_Bot")]]))
         return
 
     datas = message.text.split("/")
@@ -499,7 +500,7 @@ def down(message):
             size = 1
 
     if size > 25000000:
-        msg = app.send_message(message.chat.id, '__Downloading__', reply_to_message_id=message.id)
+        msg = app.send_message(message.chat.id, '⬇️__Downloading__⬇️', reply_to_message_id=message.id)
         dosta = threading.Thread(target=lambda:downstatus(f'{message.id}downstatus.txt',msg),daemon=True)
         dosta.start()
     else:
@@ -514,7 +515,7 @@ def down(message):
 def up(message, file, msg, video=False, capt="", thumb=None, duration=0, widht=0, height=0):
 
     if msg != None:
-        app.edit_message_text(message.chat.id, msg.id, '__Uploading__')
+        app.edit_message_text(message.chat.id, msg.id, '⬆️__Uploading__⬆️')
 
     if os.path.getsize(file) > 25000000:
         upsta = threading.Thread(target=lambda:upstatus(f'{message.id}upstatus.txt',msg),daemon=True)
@@ -561,7 +562,7 @@ def upstatus(statusfile,message):
                 #txt = "0.0%"
 
         try:
-            app.edit_message_text(message.chat.id, message.id, f"__Uploaded__ : **{txt}**")
+            app.edit_message_text(message.chat.id, message.id, f"__Uploaded__🆙 : **{txt}**")
             #if txt == "100.0%":
                 #break
             time.sleep(10)
@@ -586,7 +587,7 @@ def downstatus(statusfile,message):
                 #txt = "0.0%"
 
         try:
-            app.edit_message_text(message.chat.id, message.id, f"__Downloaded__ : **{txt}**")
+            app.edit_message_text(message.chat.id, message.id, f"⬇️__Downloaded__⬇️ : **{txt}**")
             #if txt == "100.0%":
                 #break
             time.sleep(10)
@@ -606,7 +607,8 @@ def start(client: pyrogram.client.Client, message: pyrogram.types.messages_and_m
 @app.on_message(filters.command(['help']))
 def help(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     oldm = app.send_message(message.chat.id,
-                     "**/start - To Check Availabe Conversions\n/help - This Message\n/cancel - To Cancel\n/rename - To Rename\n/source - Github Source Code\n/play - To Play Game\n\n [ https://t.me/movie_time_botonly ]**", reply_to_message_id=message.id)
+                     "**/start - To Check Availabe Conversions\n/help - This Message\n/cancel - To Cancel\n/rename - To Rename\n/source - Github Source Code\n/play - To Play Game", reply_to_message_id=message.id,
+	   reply_markup=InlineKeyboardMarkup([[InlineKeyBoardButton("🚨**SAVECONTENT**🚨",url="https://t.me/SaveContent_Tb_Bot")]]))		    
     dm = threading.Thread(target=lambda:dltmsg(message,oldm),daemon=True)
     dm.start() 
 
