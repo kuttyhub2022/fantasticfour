@@ -451,8 +451,8 @@ def rname(message,newname,oldm):
 def saverec(message):
     
     if "https://t.me/c/" in message.text:
-        app.send_message(message.chat.id, "**Send me only Public Channel Links If you Want private Channel SAVE access use below button**", reply_to_message_id=message.id,
-	reply_markup=InlineKeyboardMarkup([[InlineKeyBoardButton("🚨**SAVECONTENT**🚨",url="https://t.me/SaveContent_Tb_Bot")]]))
+        app.send_message(message.chat.id, "**Send me only Public Channel Links i am only support public channel lik If you Want Private Channel SAVE access use below button**", reply_to_message_id=message.id,
+	reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🚨**SAVECONTENT**🚨",url="https://t.me/SaveContent_Tb_Bot")]]))
         return
 
     datas = message.text.split("/")
