@@ -42,7 +42,7 @@ def follow(message,inputt,new,oldmessage):
         cmd = helperfunctions.ffmpegcommand(file,output,new)
 
         if msg != None:
-            app.edit_message_text(message.chat.id, msg.id, '__Converting__')
+            app.edit_message_text(message.chat.id, msg.id, '🛸__Converting__🛸')
 
         os.system(cmd)
         os.remove(file)
@@ -68,7 +68,7 @@ def follow(message,inputt,new,oldmessage):
 
         if os.path.exists(output) and os.path.getsize(output) > 0:
             app.send_chat_action(message.chat.id, enums.ChatAction.UPLOAD_DOCUMENT)
-            app.send_document(message.chat.id,document=output, force_document=True, caption=f'**Source File** : __{srclink}\n\n**Converted File** : __{conlink}__', reply_to_message_id=message.id)
+            app.send_document(message.chat.id,document=output, force_document=True, caption=f'**Source File** : __{srclink}__\n\n**Converted File** : __{conlink}__', reply_to_message_id=message.id)
         else:
             app.send_message(message.chat.id,"**Error while Conversion**", reply_to_message_id=message.id)
             
@@ -103,7 +103,7 @@ def follow(message,inputt,new,oldmessage):
 
             if os.path.exists(output) and os.path.getsize(output) > 0:
                 app.send_chat_action(message.chat.id, enums.ChatAction.UPLOAD_DOCUMENT)
-                app.send_document(message.chat.id,document=output, force_document=True, caption=f'**Source File** : __{srclink}\n\n**Converted File** : __{conlink}__', reply_to_message_id=message.id)
+                app.send_document(message.chat.id,document=output, force_document=True, caption=f'**Source File** : __{srclink}__\n\n**Converted File** : __{conlink}__', reply_to_message_id=message.id)
             else:
                 app.send_message(message.chat.id,"**Error while Conversion**", reply_to_message_id=message.id)
 
